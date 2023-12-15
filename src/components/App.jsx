@@ -105,9 +105,7 @@ class App extends Component {
         {this.state.images && (
           <ImageGallery images={this.state.images} openModal={this.openModal} />
         )}
-        {this.state.loadMore && !allPagesLoaded && (
-          <Button onLoadMore={this.onLoadMore} />
-        )}
+        {this.state.loadMore && <Button onLoadMore={this.onLoadMore} />}
         {this.state.isShowModal && (
           <Modal
             hideModal={this.hideModal}
