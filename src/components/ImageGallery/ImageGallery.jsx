@@ -1,11 +1,11 @@
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
-
-const ImageGallery = ({ images }) => {
+import css from 'components/ImageGallery/ImageGallery.module.css';
+const ImageGallery = ({ images, openModal }) => {
   return (
-    <ul>
-      {images.map(image => {
-        <ImageGalleryItem image={image}></ImageGalleryItem>;
-      })}
+    <ul className={css.container}>
+      {images.map(image => (
+        <ImageGalleryItem key={image.id} image={image} openModal={openModal} />
+      ))}
     </ul>
   );
 };

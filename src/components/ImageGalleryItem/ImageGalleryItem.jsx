@@ -1,9 +1,16 @@
-const ImageGalleryItem = ({ image: id, webformatURL }) => {
+const ImageGalleryItem = ({ image, openModal }) => {
+  const { tags, webformatURL, largeImageURL } = image;
+
+  const handleClick = () => {
+    openModal(largeImageURL, tags);
+  };
+
   return (
-    <li class="gallery-item" key={id}>
-      <img src={webformatURL} alt="" />
+    <li onClick={handleClick}>
+      <img src={webformatURL} alt="tags" loading="lazy" />
     </li>
   );
 };
 
 export default ImageGalleryItem;
+//
