@@ -5,7 +5,6 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
 import Loader from './Loader/Loader';
-import { ToastContainer, toast } from 'react-toastify';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 class App extends Component {
@@ -19,7 +18,6 @@ class App extends Component {
     largeImgUrl: null,
     tag: null,
     loader: false,
-    allPages: 0,
   };
 
   componentDidUpdate(_, prevState) {
@@ -36,7 +34,7 @@ class App extends Component {
 
       const response = await getAllImages(this.state.q, this.state.page);
       const { totalHits, hits } = response;
-      const allPages = Math.floor(totalHits / this.state.perPage);
+      // const allPages = Math.floor(totalHits / this.state.perPage);
       if (totalHits === 0) {
         Notify.info(`There is no such images like ${this.state.q}`);
         this.setState({
@@ -98,7 +96,7 @@ class App extends Component {
   };
 
   render() {
-    const allPagesLoaded = this.state.page >= this.state.allPages;
+    // const allPagesLoaded = this.state.page >= this.state.allPages;
 
     return (
       <>
