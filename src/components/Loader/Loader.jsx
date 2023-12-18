@@ -1,4 +1,5 @@
 import { ThreeCircles } from 'react-loader-spinner';
+import css from 'components/Loader/Loader.module.css';
 
 const Loader = () => {
   return (
@@ -7,12 +8,12 @@ const Loader = () => {
       width="100"
       color="#4fa94d"
       wrapperStyle={{}}
-      wrapperClass=""
+      wrapperClass={css.loader}
       visible={true}
       ariaLabel="three-circles-rotating"
-      outerCircleColor=""
-      innerCircleColor=""
-      middleCircleColor=""
+      outerCircleColor="#000066"
+      innerCircleColor="#EC83BB"
+      middleCircleColor="#000066"
     />
   );
 };
