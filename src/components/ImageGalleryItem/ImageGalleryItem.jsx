@@ -1,3 +1,5 @@
+import css from 'components/ImageGalleryItem/ImageGalleryItem.module.css';
+
 const ImageGalleryItem = ({ image, openModal }) => {
   const { tags, webformatURL, largeImageURL } = image;
 
@@ -6,8 +8,8 @@ const ImageGalleryItem = ({ image, openModal }) => {
   };
 
   return (
-    <li onClick={handleClick}>
-      <img src={webformatURL} alt="tags" loading="lazy" />
+    <li onClick={handleClick} className={css.item}>
+      <img src={webformatURL} alt="tags" loading="lazy" className={css.img} />
     </li>
   );
 };

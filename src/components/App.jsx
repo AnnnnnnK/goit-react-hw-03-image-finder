@@ -31,15 +31,22 @@ class App extends Component {
       this.setState({
         loader: true,
       });
-
       const response = await getAllImages(this.state.q, this.state.page);
       const { totalHits, hits } = response;
-      // const allPages = Math.floor(totalHits / this.state.perPage);
       if (totalHits === 0) {
-        Notify.info(`There is no such images like ${this.state.q}`);
         this.setState({
           loadMore: false,
         });
+        Notify.info(`There is no such images like ${this.state.q}`);
+        return;
+      } else if (hits.length === 0) {
+        this.setState({
+          loadMore: false,
+        });
+        Notify.info(`There is no more images`);
+        return;
+      } else if (response) {
+        Notify.success(`Yey, we found ${hits.length} images`);
       }
 
       const newImages = hits.map(
@@ -59,7 +66,7 @@ class App extends Component {
         loadMore: true,
       }));
     } catch {
-      console.log('error');
+      Notify.failure(`Oops, something went wrong`);
     } finally {
       this.setState({
         loader: false,
@@ -76,12 +83,15 @@ class App extends Component {
     }
     this.setState({
       q,
+      page: 1,
+      images: null,
     });
   };
 
   onLoadMore = () => {
     this.setState(prevState => ({
       page: prevState.page + 1,
+      loader: true,
     }));
   };
 
@@ -96,15 +106,13 @@ class App extends Component {
   };
 
   render() {
-    // const allPagesLoaded = this.state.page >= this.state.allPages;
-
     return (
       <>
         <Searchbar onSubmit={this.onSubmit} />
-        {this.state.loader && <Loader />}
         {this.state.images && (
           <ImageGallery images={this.state.images} openModal={this.openModal} />
         )}
+        {this.state.loader && <Loader />}
         {this.state.loadMore && <Button onLoadMore={this.onLoadMore} />}
         {this.state.isShowModal && (
           <Modal
